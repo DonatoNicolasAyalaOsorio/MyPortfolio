@@ -1,16 +1,32 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { ArrowUpRight } from 'lucide-react';
+import { useLanguage } from '../i18n';
 
 interface ProjectCardProps {
   title: string;
+  titleEn?: string;
   description: string;
+  descriptionEn?: string;
   image: string;
   technologies: string[];
   link: string;
 }
 
-export function ProjectCard({ title, description, image, technologies, link }: ProjectCardProps) {
+export function ProjectCard({ 
+  title, 
+  titleEn, 
+  description, 
+  descriptionEn, 
+  image, 
+  technologies, 
+  link 
+}: ProjectCardProps) {
+  const { t } = useLanguage();
+  
+  const displayTitle = titleEn ? t(title, titleEn) : title;
+  const displayDescription = descriptionEn ? t(description, descriptionEn) : description;
+
   return (
     <motion.a
       href={link}
@@ -25,15 +41,15 @@ export function ProjectCard({ title, description, image, technologies, link }: P
       <div className="aspect-w-16 aspect-h-9">
         <img
           src={image}
-          alt={title}
+          alt={displayTitle}
           className="object-cover w-full h-full transform group-hover:scale-105 transition-transform duration-700"
         />
       </div>
       <div className="project-content">
         <div className="flex items-start justify-between">
           <div>
-            <h3 className="text-2xl font-semibold mb-2">{title}</h3>
-            <p className="text-white/80 mb-4 text-balance">{description}</p>
+            <h3 className="text-2xl font-semibold mb-2">{displayTitle}</h3>
+            <p className="text-white/80 mb-4 text-balance">{displayDescription}</p>
           </div>
           <ArrowUpRight className="w-6 h-6 transform group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300" />
         </div>

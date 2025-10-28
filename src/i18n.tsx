@@ -1,0 +1,6 @@
+import React, { createContext, useContext, useEffect, useMemo, useState } from "react";type Lang = "es" | "en";interface LanguageContextValue {  lang: Lang;  setLang: (lang: Lang) => void;  t: (es: string, en: string) => string;}const LanguageContext = createContext<LanguageContextValue>({  lang: "es",  setLang: () => {},  t: (es) => es});const getInitialLang = (): Lang => {  try {    const saved = localStorage.getItem("lang");    if (saved === "es" || saved === "en") return saved;  } catch {}  return navigator.language.toLowerCase().startsWith("en") ? "en" : "es";};export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {  const [lang, setLang] = useState<Lang>(getInitialLang);  useEffect(() => {    try {      localStorage.setItem("lang", lang);    } catch {}  }, [lang]);  const value = useMemo(    () => ({      lang,      setLang,      t: (es: string, en: string) => (lang === "es" ? es : en)    }),    [lang]  );
+
+  return <LanguageContext.Provider value={value}>{children}</LanguageContext.Provider>;
+};
+
+export const useLanguage = () => useContext(LanguageContext);
