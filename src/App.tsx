@@ -41,13 +41,13 @@ function App() {
             className="text-center"
           >
             <motion.div 
-              className="w-64 h-64 mx-auto mb-16 rounded-[2.5rem] overflow-hidden shadow-2xl"
+              className="w-80 h-80 mx-auto mb-16 rounded-[2.5rem] overflow-hidden shadow-2xl"
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.2, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
             >
               <img
-                src="https://i.pinimg.com/736x/3a/d9/46/3ad946a5d09e0afdb7d02823ccfde72c.jpg"
+                src="https://i.pinimg.com/736x/a4/a7/01/a4a70104a6fbe2b27dc1007c4ce53a6b.jpg"
                 alt="Donato Nicolás Ayala Osorio"
                 className="w-full h-full object-cover"
               />
